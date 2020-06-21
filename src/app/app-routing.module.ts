@@ -6,6 +6,7 @@ import {RegisterComponent} from './register/register.component';
 import {AdminComponent} from './admin/admin.component';
 import {EditProductComponent} from './edit-product/edit-product.component';
 import {CategoryComponent} from './category/category.component';
+import {ProductComponent} from './product/product.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'auth/signup', component: RegisterComponent},
   {path: 'dolap/admin', component: AdminComponent, canActivate: [AuthGuard]},
   {path: 'category/add', component: CategoryComponent, canActivate: [AuthGuard]},
-  {path: 'product/edit/:id', component: EditProductComponent, canActivate: [AuthGuard]}
+  {path: 'product/edit/:id', component: EditProductComponent, canActivate: [AuthGuard]},
+  {path: 'product/add', component: ProductComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
