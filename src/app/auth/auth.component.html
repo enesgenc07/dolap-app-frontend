@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Trendyol</mat-card-title>
+    <img src="https://cdn.dolap.com/web/images/logo-3.svg" width="200" height="300" >
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-error *ngIf="loginInvalid">
+        The username and password were not recognised
+      </mat-error>
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Username" formControlName="username" required>
+        <mat-error>
+          Please provide a valid username
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Login</button>
+      <a routerLink="/auth/signup"
+         class="signup">
+        Sign up for an Account
+      </a>
+    </form>
+  </mat-card-content>
+</mat-card>

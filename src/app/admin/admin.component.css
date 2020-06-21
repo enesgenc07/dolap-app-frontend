@@ -1,0 +1,10 @@
+mat-card {
+  max-width: 1000px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+table {
+  width: 100%;
+}
