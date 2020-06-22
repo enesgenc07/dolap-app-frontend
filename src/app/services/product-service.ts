@@ -7,7 +7,7 @@ import {ProductDto} from '../model/product';
 })
 
 export class ProductService {
-  url = 'http://18.157.149.249:8093/api/products/';
+  url = 'http://18.157.149.249:8091/api/products/';
 
   constructor(private http: HttpClient) {
   }
