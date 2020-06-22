@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
   productForm: any;
   products: ProductDto[];
   displayedColumns: string[] = ['id', 'name', 'description', 'note', 'category', 'price', 'action'];
-
+  loginUser: string;
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
   constructor(private fb: FormBuilder, private productService: ProductService,
@@ -36,7 +36,7 @@ export class AdminComponent implements OnInit {
       note: ['']
     });
     this.getAllProducts();
-
+    this.loginUser = this.tokenStorageService.getUser().username;
   }
 
 
@@ -74,4 +74,5 @@ export class AdminComponent implements OnInit {
       this.tokenStorageService.signOut();
       window.location.reload();
     }
+
 }
