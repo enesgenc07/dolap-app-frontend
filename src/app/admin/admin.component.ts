@@ -28,6 +28,7 @@ export class AdminComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.toastr.clear();
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
