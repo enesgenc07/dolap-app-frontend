@@ -1,10 +1,20 @@
 <mat-card>
-  <div class="mat-action-row"></div>
-  <h2>İkinci El Kıyafet Online Alışveriş Sitesi</h2>
+  <div class="mat-action-row">
+    <div class="col-8">
+      <div class="column">
+        <h2>İkinci El Kıyafet Online Alışveriş Sitesi</h2>
+      </div>
+      <div class="column" style="text-align: right">
+        <button mat-button color="primary" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+
+
   <img src="https://cdn.dolap.com/web/images/logo-3.svg" width="300" height="100">
   <div class="row">
-      <button mat-button color="primary" (click)="createProduct()" >Create Product</button>
-      <button mat-button color="primary" (click)="createCategory()" >Create Category</button>
+    <button mat-button color="primary" (click)="createProduct()">Create Product</button>
+    <button mat-button color="primary" (click)="createCategory()">Create Category</button>
   </div>
   <table mat-table [dataSource]="products">
 

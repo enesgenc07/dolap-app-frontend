@@ -5,6 +5,7 @@ import {ProductDto} from '../model/product';
 import {ToastrService} from 'ngx-toastr';
 import {MatTable} from '@angular/material';
 import {Router} from '@angular/router';
+import {TokenStorageService} from '../token-storage.service';
 
 @Component({
   selector: 'app-admin',
@@ -21,6 +22,7 @@ export class AdminComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productService: ProductService,
               private toastr: ToastrService, private router: Router,
+              private tokenStorageService: TokenStorageService
   ) {
   }
 
@@ -68,4 +70,8 @@ export class AdminComponent implements OnInit {
     });
   }
 
+    logout() {
+      this.tokenStorageService.signOut();
+      window.location.reload();
+    }
 }
