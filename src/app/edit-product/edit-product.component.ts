@@ -5,6 +5,8 @@ import {ProductService} from '../services/product-service';
 import {ProductDto} from '../model/product';
 import {CategoryService} from '../services/category-service';
 import {Category} from '../model/category';
+import {Location} from '@angular/common';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-product',
@@ -17,11 +19,13 @@ export class EditProductComponent implements OnInit {
   productDetail: ProductDto;
   productForm: FormGroup;
   categories: Category[];
-  selectedCategory = '';
+  selectedCategory: Category;
 
   constructor(private service: ProductService, private fb: FormBuilder,
               private router: Router, private activatedRoute: ActivatedRoute,
-              private categoryService: CategoryService) {
+              private location: Location,
+              private categoryService: CategoryService,
+              private toastr: ToastrService) {
     this.activatedRoute.params.subscribe(params => {
       this.productId = params.id;
     });
@@ -36,7 +40,7 @@ export class EditProductComponent implements OnInit {
   initializeForm() {
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
-      desc: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       price: ['', [Validators.required]],
       category: ['', [Validators.required]],
       note: ['']
@@ -48,21 +52,33 @@ export class EditProductComponent implements OnInit {
       this.productDetail = res;
       this.productForm.patchValue({
         name: this.productDetail.name,
-        desc: this.productDetail.description,
+        description: this.productDetail.description,
         price: this.productDetail.price,
-        category: this.productDetail.category.name,
+        category: this.productDetail.category,
         note: this.productDetail.note,
       });
-      this.selectedCategory = this.productDetail.category.id;
+      this.selectedCategory = this.productDetail.category;
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   updateProduct() {
     if (this.productForm.valid) {
-      const product = this.productForm.value;
-      this.service.update(this.productId, product).subscribe(() => {
-        this.router.navigate(['dolap/admin']);
-      });
+      try {
+        const product = this.productForm.value;
+        this.service.update(this.productId, product).subscribe(() => {
+            this.toastr.success('Product Successfully Updated');
+            this.router.navigate(['dolap/admin']);
+          },
+          err => {
+            this.toastr.error(err.error.message);
+          });
+      } catch (err) {
+        this.toastr.error(err.error.message);
+      }
     }
   }
 

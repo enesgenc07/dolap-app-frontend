@@ -5,8 +5,6 @@ import {ProductDto} from '../model/product';
 import {ToastrService} from 'ngx-toastr';
 import {MatTable} from '@angular/material';
 import {Router} from '@angular/router';
-import {CategoryService} from '../services/category-service';
-import {Category} from '../model/category';
 
 @Component({
   selector: 'app-admin',
@@ -23,7 +21,7 @@ export class AdminComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productService: ProductService,
               private toastr: ToastrService, private router: Router,
-              ) {
+  ) {
   }
 
 
@@ -39,13 +37,13 @@ export class AdminComponent implements OnInit {
 
   }
 
-  onSubmit(product: ProductDto) {
-    this.createProduct(product);
-    this.productForm.reset();
+
+  createProduct() {
+    this.router.navigate(['product/add']);
   }
 
-  resetForm() {
-    this.productForm.reset();
+  createCategory() {
+    this.router.navigate(['category/add']);
   }
 
 
@@ -63,8 +61,6 @@ export class AdminComponent implements OnInit {
   }
 
 
-
-
   deleteProduct(product: ProductDto) {
     this.productService.delete(product.id).subscribe(() => {
       this.toastr.success('Deleted Product');
@@ -72,19 +68,4 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  private createProduct(product: ProductDto) {
-    if (product.id != null) {
-      this.productService.update(product.id, product).subscribe(
-        resp => {
-          this.toastr.success('Updated Product');
-        }
-      );
-    } else {
-      this.productService.create(product).subscribe(
-        resp => {
-          this.toastr.success('Created Product');
-        }
-      );
-    }
-  }
 }

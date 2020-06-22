@@ -18,7 +18,7 @@
           <tr>
             <td>
               <mat-form-field class="full-width-input">
-                <input matInput formControlName="desc" matTooltip="Enter Product Description"
+                <input matInput formControlName="description" matTooltip="Enter Product Description"
                        placeholder="Product Description">
               </mat-form-field>
             </td>
@@ -44,8 +44,8 @@
           <tr>
             <td>
               <mat-form-field>
-                <mat-select name="category" [(value)]="selectedCategory" placeholder="Category">
-                  <mat-option *ngFor="let category of categories" [value]="category.id">
+                <mat-select formControlName="category" [(ngModel)]="selectedCategory" placeholder="Category">
+                  <mat-option *ngFor="let category of categories" [value]="category">
                     {{category.name}}
                   </mat-option>
                 </mat-select>
@@ -53,6 +53,7 @@
             </td>
           </tr>
         </mat-card-content>
+        <button mat-raised-button color="primary" (click)="goBack()">Geri</button>
         <button type="submit" mat-raised-button color="primary" matTooltip="Add Product"
                 [disabled]="!productForm.valid">Save
         </button>

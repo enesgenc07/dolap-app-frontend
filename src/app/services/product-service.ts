@@ -24,8 +24,8 @@ export class ProductService {
     return this.http.delete(`${this.url}delete/${id}`);
   }
 
-  update(id, product) {
-    return this.http.put(`${this.url}update/${id}`, product );
+  update(id, productDto) {
+    return this.http.put(`${this.url}update/${id}`, productDto );
   }
 
   create(product) {

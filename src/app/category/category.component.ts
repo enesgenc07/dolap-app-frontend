@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CategoryService} from '../services/category-service';
 import {ToastrService} from 'ngx-toastr';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-category',
@@ -13,7 +14,8 @@ export class CategoryComponent implements OnInit {
   categoryForm: FormGroup;
 
   constructor(private service: CategoryService, private fb: FormBuilder,
-              private router: Router, private toastr: ToastrService) {
+              private router: Router, private toastr: ToastrService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -28,13 +30,23 @@ export class CategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.categoryForm.valid) {
-      this.service.create(this.categoryForm.value).subscribe(
-        resp => {
-          this.router.navigate(['dolap/admin']);
-          this.toastr.success('Successfully Added Category');
-        }
-      );
+    try {
+      if (this.categoryForm.valid) {
+        this.service.create(this.categoryForm.value).subscribe(
+          resp => {
+            this.router.navigate(['dolap/admin']);
+            this.toastr.success('Successfully Added Category');
+          }, err => {
+            this.toastr.error(err.error.message);
+          }
+        );
+      }
+    } catch (err) {
+      this.toastr.error(err.error.message);
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

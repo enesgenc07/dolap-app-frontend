@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../services/product-service';
 import {CategoryService} from '../services/category-service';
 import {Category} from '../model/category';
+import {Location} from '@angular/common';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -15,11 +17,12 @@ export class ProductComponent implements OnInit {
 
   productForm: FormGroup;
   categories: Category[];
-  selectedCategory = '';
 
   constructor(private service: ProductService, private fb: FormBuilder,
               private router: Router, private activatedRoute: ActivatedRoute,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private location: Location,
+              private toastr: ToastrService) {
     this.initializeForm();
   }
 
@@ -30,7 +33,7 @@ export class ProductComponent implements OnInit {
   initializeForm() {
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
-      desc: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       price: ['', [Validators.required]],
       category: ['', [Validators.required]],
       note: ['']
@@ -39,11 +42,20 @@ export class ProductComponent implements OnInit {
 
 
   createProject() {
+
     if (this.productForm.valid) {
-      const product = this.productForm.value;
-      this.service.create(product).subscribe(() => {
-        this.router.navigate(['dolap/admin']);
-      });
+      try {
+        const product = this.productForm.value;
+        this.service.create(product).subscribe(() => {
+            this.toastr.success('Product Added Successfuly');
+            this.router.navigate(['dolap/admin']);
+          }, err => {
+            this.toastr.error(err.error.message);
+          }
+        );
+      } catch (err) {
+        this.toastr.error(err.error.message);
+      }
     }
   }
 
@@ -53,6 +65,10 @@ export class ProductComponent implements OnInit {
         this.categories = resp;
       }
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
