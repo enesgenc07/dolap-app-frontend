@@ -71,9 +71,9 @@ export class AdminComponent implements OnInit {
     });
   }
 
-    logout() {
-      this.tokenStorageService.signOut();
-      window.location.reload();
-    }
+  logout() {
+    this.tokenStorageService.signOut();
+    this.router.navigate(['auth/signin']);
+  }
 
 }
