@@ -47,6 +47,6 @@ export class CategoryComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dolap/admin']);
   }
 }

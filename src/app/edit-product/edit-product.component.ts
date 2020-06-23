@@ -62,7 +62,7 @@ export class EditProductComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dolap/admin']);
   }
 
   updateProduct() {

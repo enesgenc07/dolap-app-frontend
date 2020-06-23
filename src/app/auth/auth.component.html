@@ -1,6 +1,5 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Trendyol</mat-card-title>
     <img src="https://cdn.dolap.com/web/images/logo-3.svg" width="200" height="300" >
   </mat-card-header>
   <mat-card-content>
@@ -20,11 +19,8 @@
           Please provide a valid password
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary">Login</button>
-      <a routerLink="/auth/signup"
-         class="signup">
-        Sign up for an Account
-      </a>
+      <button mat-raised-button color="primary" class="login-button">Login</button>
+      <button mat-raised-button routerLink="/auth/signup" color="warn">Sign Up</button>
     </form>
   </mat-card-content>
 </mat-card>

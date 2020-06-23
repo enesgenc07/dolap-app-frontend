@@ -4,7 +4,14 @@ mat-card {
   text-align: center;
 }
 
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 table {
   width: 100%;
+  text-align: left !important;
+}
+
+.action-btn-class {
+  width: 100%;
+  max-width: fit-content;
+  margin-right: -20px !important;
 }
