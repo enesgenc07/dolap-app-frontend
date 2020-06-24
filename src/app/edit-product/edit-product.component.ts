@@ -33,6 +33,7 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.toastr.clear();
     this.getProductId(this.productId);
     this.getAllCategories();
   }

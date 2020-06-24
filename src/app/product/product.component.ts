@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.toastr.clear();
     this.getAllCategories();
   }
 

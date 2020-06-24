@@ -19,6 +19,7 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.toastr.clear();
     this.initializeForm();
   }
 

@@ -28,7 +28,6 @@ export class AdminComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.toastr.clear();
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -65,6 +64,7 @@ export class AdminComponent implements OnInit {
 
 
   deleteProduct(product: ProductDto) {
+    this.toastr.clear();
     this.productService.delete(product.id).subscribe(() => {
       this.toastr.success('Deleted Product');
       this.getAllProducts();
@@ -72,6 +72,7 @@ export class AdminComponent implements OnInit {
   }
 
   logout() {
+    this.toastr.clear();
     this.tokenStorageService.signOut();
     this.router.navigate(['auth/signin']);
   }
